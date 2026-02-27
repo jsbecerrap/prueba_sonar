@@ -2,7 +2,6 @@ package co.edu.unbosque.entity;
 
 import java.util.List;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -27,13 +26,13 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(name = "usuario", unique = true, nullable = false)
     @NotBlank
-    private String usuario;
+    private String correo_usuario;
 
-    @Column(name = "contrasena")
+    @Column(name = "contrasena", nullable = false)
     @NotBlank
-    @JsonProperty(access =JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contrasena;
 
     @ManyToMany
@@ -41,51 +40,43 @@ public class Usuario {
         name = "usuarios_roles",
         joinColumns = @JoinColumn(name = "usuario_id"),
         inverseJoinColumns = @JoinColumn(name = "rol_id"),
-        uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "rol_id"})
+        uniqueConstraints = @UniqueConstraint(columnNames = { "usuario_id", "rol_id" })
     )
     private List<Rol> roles;
 
     @Transient
-     @JsonProperty(access =JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean admin;
-    @JsonProperty(access =JsonProperty.Access.WRITE_ONLY)
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean activo;
 
+    public Usuario() {}
 
-    public Usuario() {
-    }
-
-    public Usuario(String usuario, String contrasena) {
-        this.usuario = usuario;
+    public Usuario(String correo_usuario, String contrasena) {
+        this.correo_usuario = correo_usuario;
         this.contrasena = contrasena;
     }
 
     @PrePersist
-    public void prePersist(){
-        activo=true;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void prePersist() {
+        this.activo = true;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public String getCorreo_usuario() {
+        return correo_usuario;
+    }
+
+    public void setCorreo_usuario(String correo_usuario) {
+        this.correo_usuario = correo_usuario;
     }
 
     public String getContrasena() {
@@ -110,5 +101,13 @@ public class Usuario {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

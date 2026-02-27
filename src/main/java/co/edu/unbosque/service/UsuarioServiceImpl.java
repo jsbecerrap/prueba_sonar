@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +16,21 @@ import co.edu.unbosque.repository.UsuarioRepository;
 @Service
 public class UsuarioServiceImpl implements  UsuarioService{
 
-    @Autowired
+    
     private UsuarioRepository repository;
-    @Autowired
+    
     private RolRepository rolRepository;
-    @Autowired
+    
     private PasswordEncoder passwordEncoder;
+
+ 
+    public UsuarioServiceImpl(UsuarioRepository repository, 
+                               RolRepository rolRepository, 
+                               PasswordEncoder passwordEncoder) {
+        this.repository = repository;
+        this.rolRepository = rolRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
      @Transactional(readOnly = true)
@@ -37,8 +46,8 @@ public class UsuarioServiceImpl implements  UsuarioService{
         listaRoles.add(rolOptional.get());
 
         if(usuario.isAdmin()){
-               Optional<Rol> rolOptional_admin =rolRepository.findByNombre("ROLE_ADMIN");
-               listaRoles.add(rolOptional_admin.get());
+               Optional<Rol> rolOptionalAdmin  =rolRepository.findByNombre("ROLE_ADMIN");
+               listaRoles.add(rolOptionalAdmin .get());
         }
         usuario.setRoles(listaRoles);
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));

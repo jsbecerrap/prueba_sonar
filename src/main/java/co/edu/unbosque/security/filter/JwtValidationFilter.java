@@ -64,7 +64,7 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
            Collection<? extends GrantedAuthority> authorities = ((List<?>) authoritiesClaims)
     .stream()
     .map(role -> new SimpleGrantedAuthority(role.toString()))
-    .collect(Collectors.toList());
+    .toList();
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     username, null, authorities);

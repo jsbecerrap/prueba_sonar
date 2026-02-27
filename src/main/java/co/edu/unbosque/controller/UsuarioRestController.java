@@ -33,13 +33,13 @@ public class UsuarioRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody Usuario usuario, BindingResult result){
+    public ResponseEntity<Object> crear(@Valid @RequestBody Usuario usuario, BindingResult result){
          if(result.hasFieldErrors()){
             return validation(result);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(usuario));
     }
-     private ResponseEntity<?> validation(BindingResult result) {
+     private ResponseEntity<Object> validation(BindingResult result) {
     Map<String,String> json_errors = new HashMap<>();
    result.getFieldErrors().forEach(err -> {
     json_errors.put(
@@ -51,7 +51,7 @@ return ResponseEntity.status(400).body(json_errors);
     
     }
     @PostMapping("/registrar")
-    public ResponseEntity<?> registrar(@Valid @RequestBody Usuario usuario, BindingResult result){
+    public ResponseEntity<Object> registrar(@Valid @RequestBody Usuario usuario, BindingResult result){
          if(result.hasFieldErrors()){
             return validation(result);
         }

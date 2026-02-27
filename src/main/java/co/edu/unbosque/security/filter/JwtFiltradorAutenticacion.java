@@ -41,7 +41,7 @@ public class JwtFiltradorAutenticacion extends UsernamePasswordAuthenticationFil
 
                 try {
                     u= new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-                    correo_usuario=u.getUsuario();
+                    correo_usuario=u.getCorreoUsuario();
                 contrasena=u.getContrasena();
                 } catch ( IOException e) {
                     // TODO Auto-generated catch block

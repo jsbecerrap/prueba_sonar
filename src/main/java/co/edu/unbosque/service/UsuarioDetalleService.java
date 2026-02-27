@@ -36,7 +36,7 @@ public class UsuarioDetalleService implements UserDetailsService{
             List<GrantedAuthority> authorities = u.getRoles().stream()
             .map(rol -> new SimpleGrantedAuthority(rol.getNombre())).collect(Collectors.toList());
            return new org.springframework.security.core.userdetails.User(
-    u.getUsuario(),
+    u.getCorreoUsuario(),
     u.getContrasena(),
     u.isActivo(),
     true,
