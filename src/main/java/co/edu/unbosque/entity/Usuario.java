@@ -28,7 +28,7 @@ public class Usuario {
 
     @Column(name = "usuario", unique = true, nullable = false)
     @NotBlank
-    private String correo_usuario;
+    private String correoUsuario;
 
     @Column(name = "contrasena", nullable = false)
     @NotBlank
@@ -53,8 +53,8 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(String correo_usuario, String contrasena) {
-        this.correo_usuario = correo_usuario;
+    public Usuario(String correoUsuario, String contrasena) {
+        this.correoUsuario = correoUsuario;
         this.contrasena = contrasena;
     }
 
@@ -71,12 +71,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getCorreo_usuario() {
-        return correo_usuario;
+    public String getCorreoUsuario() {
+        return correoUsuario;
     }
 
-    public void setCorreo_usuario(String correo_usuario) {
-        this.correo_usuario = correo_usuario;
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
 
     public String getContrasena() {
